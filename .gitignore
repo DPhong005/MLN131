@@ -19,3 +19,6 @@ Thumbs.db
 # Generated public build and local test artifacts
 public/
 test-results/
+.vercel/
+
+.vercel

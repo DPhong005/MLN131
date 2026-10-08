@@ -3,7 +3,7 @@
 ## Cơ sở và phạm vi
 
 - Website đã kiểm tra: https://mln111-v3.vercel.app/ (HTML trang chủ).
-- Mã nguồn: dự án HTML/JavaScript hiện tại, có Express và trợ lý Gemini.
+- Mã nguồn: dự án HTML/JavaScript hiện tại, có Express.
 - Tài liệu: Giáo trình Chủ nghĩa xã hội khoa học, Bộ Giáo dục và Đào tạo, Nhà xuất bản Chính trị quốc gia Sự thật, 2021; dành cho bậc đại học hệ không chuyên lý luận chính trị.
 - PDF người dùng cung cấp có 273 trang scan. Đã OCR tất cả các trang, rà soát cấu trúc 7 chương, mục tiêu, các mục nội dung và câu hỏi ôn tập; đối chiếu hình ảnh một số trang. OCR còn lỗi dấu, tên riêng và chữ số; khi đưa định nghĩa hoặc trích dẫn lên website phải kiểm tra ảnh trang gốc.
 - Đây là bản đề xuất chuyển website sang môn Chủ nghĩa xã hội khoa học. Chưa thay đổi các trang, câu hỏi, chức năng hay bản đang chạy trên Vercel.
@@ -80,8 +80,7 @@ Ví dụ bài của chương 2: “Tự động hóa làm thay đổi lao độn
 | `games.html`, các trang game và dữ liệu tình huống | Chọn lại hoạt động theo mục tiêu môn học; ưu tiên ghép khái niệm, phân loại, phân tích tình huống |
 | `articles.html`, `articles/` | Chuyển trọng tâm bài viết sang lao động, quan hệ xã hội, dân chủ, dân tộc - tôn giáo và gia đình; tránh để nội dung tâm lý cá nhân chi phối môn học |
 | `js/search-data-global.js`, dữ liệu tìm kiếm trong `header.html` | Cập nhật chương, thuật ngữ, bài viết và đường dẫn; giảm dữ liệu lặp để tránh lệch nội dung |
-| `ai-assistants.html`, `js/ai-assistants.js` | Đổi tên trợ lý, câu hỏi gợi ý và lịch sử theo môn mới; kiểm tra endpoint API |
-| `server.js`, `assets/docs/` | Thay nguồn PDF Triết học bằng đúng giáo trình mới; cập nhật vai trò và yêu cầu trả lời của AI |
+| `server.js`, `assets/docs/` | Thay nguồn PDF Triết học bằng đúng giáo trình mới; phục vụ PDF và các tệp công khai |
 | `README.md` | Thay mẫu README GitLab bằng hướng dẫn chạy, biên soạn nội dung và triển khai thực tế |
 
 Hiện trang chủ mô tả module 2 bằng Descartes, Hume và Phật giáo, trong khi `module2.html` trình bày ba quy luật biện chứng. Cần sửa cơ chế đồng bộ nội dung này khi chuyển môn.
@@ -111,21 +110,9 @@ Mỗi bài có ID ổn định, chương, tiêu đề, mục tiêu, nội dung, 
 
 Giai đoạn đầu, người biên soạn sửa các file dữ liệu có hướng dẫn rõ ràng. Nếu yêu cầu là chỉnh trực tiếp trên trình duyệt mà không mở mã nguồn, cần một trang quản trị hoặc CMS; các file HTML hiện tại chưa cung cấp luồng biên tập đó. Có thể bổ sung sau khi chốt cấu trúc dữ liệu và quyền biên tập.
 
-## 7. Trợ lý AI và triển khai
+## 7. Triển khai
 
-`server.js` hiện đọc PDF Triết học Mác - Lênin và dùng vai trò giảng viên Triết học. Việc đổi giao diện sẽ không tự thay nguồn của AI. Cần thay cả PDF, cấu hình `PDF_URL` nếu có, prompt và bộ câu hỏi kiểm tra.
-
-Bản đầu có thể tiếp tục sử dụng cách gửi PDF đang có sau khi kiểm tra chất lượng và chi phí. Hướng cải thiện là lấy văn bản OCR đã sửa, chia theo chương/mục, lưu vị trí trang rồi truy xuất các đoạn liên quan khi hỏi. Câu trả lời hiển thị nguồn do hệ thống quản lý; không tin số trang do mô hình tự đoán. Khi không tìm thấy căn cứ, trợ lý nói rõ giới hạn nguồn.
-
-Kiểm tra riêng tình huống vượt giới hạn dịch vụ, PDF tải lỗi và câu hỏi ngoài nội dung giáo trình. API key giữ ở phía máy chủ.
-
-`js/ai-assistants.js` hiện chọn API theo cổng đang mở. Khi triển khai nên ưu tiên endpoint cùng nguồn `/api/ask-gemini` và xác nhận cấu hình Vercel hỗ trợ backend. Vercel có tài liệu chính thức hỗ trợ Express, kể cả mẫu `app.listen`; không kết luận backend lỗi chỉ vì thấy `app.listen` trong mã.
-
-Nguồn kỹ thuật: https://vercel.com/docs/frameworks/backend/express
-
-`server.js` hiện dùng `express.static('.')`. Khi sắp xếp lại dự án nên phục vụ một thư mục công khai riêng để tránh phục vụ các file mã nguồn và tài liệu nội bộ cùng với giao diện. Đây là nhận xét từ mã nguồn, chưa phải xác nhận mức độ công khai trên bản Vercel.
-
-Nguồn kỹ thuật: https://expressjs.com/en/starter/static-files/
+Máy chủ Express phục vụ bản website trong `public/` và API kiểm tra trạng thái. Chạy `npm run build`, `npm test` và `npm run test:browser` trước khi triển khai. Giáo trình PDF được cung cấp tại `assets/docs/cnxh-khoa-hoc-2021.pdf`.
 
 ## 8. Thứ tự triển khai và điều kiện hoàn thành
 
@@ -133,8 +120,8 @@ Nguồn kỹ thuật: https://expressjs.com/en/starter/static-files/
 2. **Làm một bài mẫu hoàn chỉnh:** đề xuất bài công nhân và tự động hóa ở chương 2; gồm nguồn, tình huống và bài kiểm tra. Hoàn thành khi cách diễn giải dễ hiểu và các luận điểm khớp giáo trình.
 3. **Đổi trang chủ, bản đồ và điều hướng:** lấy chương từ dữ liệu chung; kiểm tra đường dẫn và hiển thị điện thoại.
 4. **Triển khai đủ bài và luyện tập:** thay nội dung cũ; kiểm tra mỗi câu có đáp án, giải thích và nguồn. Tự luận dùng tiêu chí chấm, không chỉ một câu trả lời mẫu cứng.
-5. **Đổi nguồn AI và tìm kiếm:** thử câu hỏi đại diện cả 7 chương, kiểm tra nguồn trích dẫn, câu hỏi ngoài phạm vi và thông báo lỗi.
+5. **Kiểm tra tìm kiếm và dẫn nguồn:** thử câu hỏi đại diện cả 7 chương, kiểm tra nguồn trích dẫn, câu hỏi ngoài phạm vi và thông báo lỗi.
 6. **Bổ sung tiến độ, game và biên tập:** tiến độ học có thể lưu cục bộ trong bản đầu; ghi rõ giới hạn đồng bộ giữa thiết bị. Chỉ thêm game khi đo được mục tiêu kiến thức tương ứng.
 7. **Xem bản preview và phát hành:** kiểm tra tất cả liên kết, trang nguồn, đọc trên điện thoại và API trên môi trường triển khai. Mỗi lần biên soạn sau đó dùng cùng quy trình đối chiếu nguồn.
 
-Ưu tiên trước mắt: cấu trúc 7 chương, một bài mẫu tốt, dữ liệu có thể chỉnh sửa và nguồn AI đúng môn. Đây là nền tảng để mở rộng nội dung mà không tạo thêm các bản mô tả và câu hỏi mâu thuẫn nhau.
+Ưu tiên trước mắt: cấu trúc 7 chương, một bài mẫu tốt, dữ liệu có thể chỉnh sửa và nguồn học liệu đúng môn. Đây là nền tảng để mở rộng nội dung mà không tạo thêm các bản mô tả và câu hỏi mâu thuẫn nhau.

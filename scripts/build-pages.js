@@ -7,7 +7,7 @@ const routes = [
   ['index.html','home','Trang chủ'],['home.html','home','Trang chủ'],['Overview.html','overview','Lộ trình 7 chương'],
   ['practice.html','practice','Luyện tập'],['quiz.html','quiz','Ôn tập tổng hợp'],['games.html','games','Trò chơi'],
   ['game.html','game','Hoạt động tương tác'],['articles.html','articles','Bài viết'],['cases.html','cases','Tình huống đời sống'],
-  ['ai-assistants.html','ai','Trợ lý học tập'],['resources.html','resources','Giáo trình và tài nguyên'],['progress.html','progress','Tiến độ của tôi'],
+  ['resources.html','resources','Giáo trình và tài nguyên'],['progress.html','progress','Tiến độ của tôi'],
   ...chapters.flatMap(c => [[`module${c.id}.html`,'chapter',c.title,`data-chapter="${c.id}"`],[`quiz${c.id}.html`,'quiz',`Trắc nghiệm chương ${c.id}`,`data-chapter="${c.id}"`]]),
   ...articles.map(a => [`articles/${a.slug}.html`,'article',a.title,`data-article="${a.id}"`]),
   ['worldview-game.html','game','Chọn cách phân tích','data-mode="situations"'],
@@ -32,7 +32,7 @@ for (const [file,page,title,attributes=''] of routes) {
 `;
   fs.mkdirSync(path.dirname(path.join(root,file)),{recursive:true});fs.writeFileSync(path.join(root,file),document);
 }
-fs.writeFileSync(path.join(root,'header.html'),'<nav aria-label="Điều hướng chính"><a href="/home.html">CNXH · Đời sống</a><a href="/Overview.html">Lộ trình 7 chương</a><a href="/practice.html">Luyện tập</a><a href="/games.html">Trò chơi</a><a href="/articles.html">Bài viết</a><a href="/ai-assistants.html">Trợ lý học tập</a></nav>\n');
+fs.writeFileSync(path.join(root,'header.html'),'<nav aria-label="Điều hướng chính"><a href="/home.html">CNXH · Đời sống</a><a href="/Overview.html">Lộ trình 7 chương</a><a href="/practice.html">Luyện tập</a><a href="/games.html">Trò chơi</a><a href="/articles.html">Bài viết</a></nav>\n');
 fs.writeFileSync(path.join(root,'footer.html'),'<footer>Bộ Giáo dục và Đào tạo · Giáo trình Chủ nghĩa xã hội khoa học · Nhà xuất bản Chính trị quốc gia Sự thật, 2021. <a href="/resources.html">Nguồn và tài nguyên</a></footer>\n');
 const routesPath = path.join(root,'data','routes.json');
 const routesContent = JSON.stringify(routes.map(([file,page,title])=>({file,page,title})),null,2)+'\n';

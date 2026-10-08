@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { emptyState, sanitizeState, readState, writeState, chapterProgress, toggleLesson, recordQuiz, normalize, shuffled } from '../js/state.mjs';
-import { retrieve } from '../js/retrieval.mjs';
+import { hotseatSet } from '../js/arcade.mjs';
 const json = name => JSON.parse(fs.readFileSync(new URL(`../data/${name}.json`,import.meta.url),'utf8'));
 const chapters=json('chapters'), questions=json('questions');
 test('7 chapters cover the source PDF in order and all relationships resolve',()=>{
@@ -17,6 +17,15 @@ test('42 questions each have valid answers, explanation and source',()=>{
   assert.equal(questions.length,42);assert.equal(new Set(questions.map(q=>q.id)).size,42);
   for(const c of chapters)assert.equal(questions.filter(q=>q.chapterId===c.id).length,6);
   for(const q of questions){assert.equal(q.options.length,4);assert.ok(Number.isInteger(q.correct)&&q.correct>=0&&q.correct<4);assert.ok(q.explanation.length>50);const c=chapters[q.chapterId-1];assert.ok(q.pages[0]>=c.pages[0]&&q.pages[1]<=c.pages[1]);}
+});
+
+test('arcade claims have valid sources and hotseat selects 15 unique questions in tiers',()=>{
+ const claims=json('gameClaims');assert.equal(claims.length,21);
+ assert.equal(new Set(claims.map(x=>x.id)).size,21);
+ for(const x of claims){assert.ok(chapters[x.chapterId-1].lessons.some(l=>l.id===x.lessonId));assert.equal(typeof x.correct,'boolean');assert.ok(x.explanation.length>60);}
+ for(const c of chapters){assert.equal(claims.filter(x=>x.chapterId===c.id&&x.correct).length,1);assert.equal(claims.filter(x=>x.chapterId===c.id&&!x.correct).length,2);}
+ const set=hotseatSet(questions);assert.equal(set.length,15);assert.equal(new Set(set.map(q=>q.id)).size,15);
+ for(const [index,level] of ['Nhận biết','Thông hiểu','Vận dụng'].entries())assert.ok(set.slice(index*5,index*5+5).every(q=>q.level===level));
 });
 
 test('all lessons include detailed, cited sections and review prompts',()=>{
@@ -42,11 +51,6 @@ test('progress survives reload, toggles without duplicates and handles corrupt s
 });
 test('quiz best score is preserved after a worse result',()=>{const state=emptyState();recordQuiz(state,'1',5,6);recordQuiz(state,'1',2,6);assert.equal(state.quizzes['1'].best,83);assert.equal(state.quizzes['1'].percent,33);recordQuiz(state,'2',9,6);assert.equal(state.quizzes['2'],undefined);});
 test('search normalization handles Vietnamese and shuffle does not mutate source',()=>{assert.equal(normalize('Dân tộc và Gia đình'),'dan toc va gia dinh');const a=[1,2,3,4];const b=shuffled(a,()=>0);assert.deepEqual(a,[1,2,3,4]);assert.deepEqual([...b].sort(),a);assert.notDeepEqual(b,a);});
-test('retrieval locates representative material in all 7 chapters and abstains outside scope',()=>{
-  for(const [question,expected] of [['ba phát kiến của Mác',1],['ba nội dung sứ mệnh lịch sử',2],['bỏ qua chế độ tư bản chủ nghĩa',3],['dân chủ trực tiếp gián tiếp',4],['cơ cấu xã hội giai cấp',5],['tôn giáo tín ngưỡng',6],['chức năng gia đình',7]])assert.equal(retrieve(chapters,question)[0].chapterId,expected,question);
-  assert.deepEqual(retrieve(chapters,'weather forecast tomorrow bitcoin price'),[]);
-  assert.deepEqual(retrieve(chapters,'???'),[]);
-});
 test('published HTML and scripts contain no video player or old course assets',()=>{
   const routes=json('routes');assert.ok(routes.length>=40);
   for(const {file}of routes){const text=fs.readFileSync(new URL(`../public/${file}`,import.meta.url),'utf8');assert.ok(!/<video|youtube|<iframe/i.test(text),file);assert.match(text,/data-page=/);}

@@ -1,5 +1,4 @@
 export const STORAGE_KEY = 'cnxhkh.learning.v1';
-export const CHAT_KEY = 'cnxhkh.chat.v1';
 export function emptyState() { return { completed: [], quizzes: {}, essays: {}, lastLesson: null, games: {} }; }
 export function sanitizeState(value) {
   const result = emptyState();
