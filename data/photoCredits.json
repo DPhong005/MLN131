@@ -165,7 +165,11 @@
     "image": "/assets/illustrations/generated/case-1-photo.webp",
     "width": 1200,
     "height": 1081,
-    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định."
+    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định.",
+    "cutoutImage": "/assets/illustrations/generated/case-1-photo-cutout.webp",
+    "cutoutWidth": 1000,
+    "cutoutHeight": 896,
+    "cutoutChanges": "Tách nền bằng công cụ chỉnh ảnh, giữ chủ thể của ảnh nguồn; dùng trong khối tình huống ở trang chương."
   },
   {
     "id": "case-2",
@@ -177,7 +181,11 @@
     "image": "/assets/illustrations/generated/case-2-photo.webp",
     "width": 1200,
     "height": 800,
-    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định."
+    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định.",
+    "cutoutImage": "/assets/illustrations/generated/case-2-photo-cutout.webp",
+    "cutoutWidth": 1000,
+    "cutoutHeight": 661,
+    "cutoutChanges": "Tách nền bằng công cụ chỉnh ảnh, giữ chủ thể của ảnh nguồn; dùng trong khối tình huống ở trang chương."
   },
   {
     "id": "case-3",
@@ -189,7 +197,11 @@
     "image": "/assets/illustrations/generated/case-3-photo.webp",
     "width": 1200,
     "height": 800,
-    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định."
+    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định.",
+    "cutoutImage": "/assets/illustrations/generated/case-3-photo-cutout.webp",
+    "cutoutWidth": 1000,
+    "cutoutHeight": 659,
+    "cutoutChanges": "Tách nền bằng công cụ chỉnh ảnh, giữ chủ thể của ảnh nguồn; dùng trong khối tình huống ở trang chương."
   },
   {
     "id": "case-4",
@@ -201,7 +213,11 @@
     "image": "/assets/illustrations/generated/case-4-photo.webp",
     "width": 800,
     "height": 1200,
-    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định."
+    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định.",
+    "cutoutImage": "/assets/illustrations/generated/case-4-photo-cutout.webp",
+    "cutoutWidth": 690,
+    "cutoutHeight": 1000,
+    "cutoutChanges": "Tách nền bằng công cụ chỉnh ảnh, giữ chủ thể của ảnh nguồn; dùng trong khối tình huống ở trang chương."
   },
   {
     "id": "case-5",
@@ -213,7 +229,11 @@
     "image": "/assets/illustrations/generated/case-5-photo.webp",
     "width": 1200,
     "height": 800,
-    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định."
+    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định.",
+    "cutoutImage": "/assets/illustrations/generated/case-5-photo-cutout.webp",
+    "cutoutWidth": 1000,
+    "cutoutHeight": 972,
+    "cutoutChanges": "Tách nền bằng công cụ chỉnh ảnh, giữ chủ thể của ảnh nguồn; dùng trong khối tình huống ở trang chương."
   },
   {
     "id": "case-6",
@@ -225,7 +245,11 @@
     "image": "/assets/illustrations/generated/case-6-photo.webp",
     "width": 1200,
     "height": 800,
-    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định."
+    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định.",
+    "cutoutImage": "/assets/illustrations/generated/case-6-photo-cutout.webp",
+    "cutoutWidth": 1000,
+    "cutoutHeight": 691,
+    "cutoutChanges": "Tách nền bằng công cụ chỉnh ảnh, giữ chủ thể của ảnh nguồn; dùng trong khối tình huống ở trang chương."
   },
   {
     "id": "case-7",
@@ -237,7 +261,11 @@
     "image": "/assets/illustrations/generated/case-7-photo.webp",
     "width": 800,
     "height": 1200,
-    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định."
+    "changes": "Thu nhỏ và chuyển sang WebP; ảnh minh họa chủ đề, không phải ảnh ghi lại tình huống giả định.",
+    "cutoutImage": "/assets/illustrations/generated/case-7-photo-cutout.webp",
+    "cutoutWidth": 658,
+    "cutoutHeight": 1000,
+    "cutoutChanges": "Tách nền bằng công cụ chỉnh ảnh, giữ chủ thể của ảnh nguồn; dùng trong khối tình huống ở trang chương."
   },
   {
     "id": "article-1",
