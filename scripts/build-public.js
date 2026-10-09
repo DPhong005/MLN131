@@ -4,6 +4,8 @@ require('./build-pages');
 const root = path.resolve(__dirname,'..');
 const publicRoot = path.join(root,'public');
 fs.mkdirSync(publicRoot,{recursive:true});
+fs.mkdirSync(path.join(publicRoot,'api'),{recursive:true});
+fs.writeFileSync(path.join(publicRoot,'api','health.json'),JSON.stringify({ok:true,course:'cnxhkh-2021'}));
 for (const file of ['ai-assistants.html','js/retrieval.mjs']) { const target=path.join(publicRoot,file); if(fs.existsSync(target)) fs.unlinkSync(target); }
 function copy(file) { const source=path.join(root,file);const target=path.join(publicRoot,file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(source,target); }
 const routes = JSON.parse(fs.readFileSync(path.join(root,'data','routes.json'),'utf8'));
